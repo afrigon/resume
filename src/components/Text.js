@@ -1,40 +1,76 @@
-import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
-import styled, { ThemeContext } from 'styled-components'
+import styled from 'styled-components'
 
-const defaultTheme = {
-    black: '#2A2D39'
-}
+import Color from '../Color'
+import Device from '../Device'
 
-const H1 = props => {
-    const themeContext = useContext(ThemeContext) || defaultTheme
+const H1 = styled.h1`
+    font-size: 130px;
+    font-weight: bold;
+    text-align: left;
+    color: ${Color.black};
+    margin-bottom: 20px;
 
-    const Text = styled.h1`
-        margin: 0;
-        padding: 0;
-        color: ${themeContext.black};
-    `
-    return <Text {...props} />
-}
+    @media ${Device.mediumAndDown} {
+        font-size: 110px;
+    }
 
-const H2 = props => {
-    const themeContext = useContext(ThemeContext) || defaultTheme
+    @media ${Device.smallAndDown} {
+        font-size: 80px;
+    }
+`
 
-    const Text =  styled.h2`
-        margin: 0;
-        padding: 0;
-        text-align: center;
-        color: ${themeContext.black};
-    `
-    return <Text {...props} />
-}
+const H2 = styled.h2`
+    font-size: 100px;
+    font-weight: bold;
+    text-align: center;
+    color: ${Color.black};
 
-const propTypes = {
-    children: PropTypes.node
-}
+    @media ${Device.mediumAndDown} {
+        font-size: 75px;
+    }
 
-H1.propTypes = propTypes
-H2.propTypes = propTypes
+    @media ${Device.smallAndDown} {
+        font-size: 50px;
+    }
+`
 
-export { H1, H2 }
+const H3 = styled.h3`
+    font-size: 90px;
+    font-weight: bold;
+    text-align: left;
+    color: ${Color.white};
+
+    @media ${Device.mediumAndDown} {
+        font-size: 55px;
+    }
+
+    @media ${Device.smallAndDown} {
+        font-size: 45px;
+    }
+`
+
+const H4 = styled.h4`
+    font-size: 50px;
+    font-weight: normal;
+    text-align: left;
+    color: ${Color.blueText};
+
+    @media ${Device.mediumAndDown} {
+        font-size: 45px;
+    }
+
+    @media ${Device.smallAndDown} {
+        font-size: 35px;
+    }
+`
+
+const P = styled.p`
+    font-size: 24px;
+    line-height: 27px;
+    font-weight: normal;
+    text-align: left;
+    color: ${Color.black};
+`
+
+export { H1, H2, H3, H4, P }
 

@@ -1,0 +1,32 @@
+[
+    {
+        "title": "Study Helper",
+        "description": "Created an IOS app in Swift using Core Data and Firebase to help students around the world with their studies.",
+        "href": "https://apps.apple.com/app/id1315378312",
+        "src": "/projects/studyhelper.jpg",
+        "action": "Find it on the AppStore",
+        "color": "#66B8EF",
+        "gravity": "left",
+        "imgStyle": {
+            "borderRadius": 39
+        }
+    },
+    {
+        "title": "Swiftness",
+        "description": "Made an original Nintendo emulator using Swift and the Metal API to bring the classics back to life.",
+        "href": "https://github.com/afrigon/swiftness",
+        "src": "/projects/swiftness.jpg",
+        "action": "Find out more",
+        "color": "#F87A52",
+        "gravity": "right"
+    },
+    {
+        "title": "Roadrunner",
+        "description": "Wrote a Minecraft like game with multiplayer support using Rust and OpenGL.",
+        "href": "https://github.com/roadrunner-craft",
+        "src": "/projects/roadrunner.jpg",
+        "action": "Find out more",
+        "color": "#8CD499",
+        "gravity": "left"
+    }
+]
