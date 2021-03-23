@@ -103,7 +103,7 @@ const CircleItem = styled(Circle)(props => `
 const circlePatterns = [
     <>
         <CircleItem color="white" size={486} style={{left: -86, bottom: -149}} />
-        <CircleItem color="#171717" size={303} style={{left: 310, bottom: -118}} />
+        <CircleItem className="hide-medium-and-down" color="#171717" size={303} style={{left: 310, bottom: -118}} />
         <CircleItem className="hide-medium-and-down" color="white" size={467} style={{right: 131, bottom: -351}} />
         <CircleItem className="hide-medium-and-down" color="#171717" size={247} style={{right: 58, bottom: -32}} />
         <CircleItem color="white" size={443} style={{right: -270, top: 64}} />
@@ -118,9 +118,9 @@ const circlePatterns = [
     <>
         <CircleItem color="white" size={486} style={{left: -86, bottom: -149}} />
         <CircleItem color="#171717" size={303} style={{left: -177, bottom: 169}} />
-        <CircleItem className="hide-medium-and-down" color="white" size={443} style={{left: "20%", top: -299}} />
+        <CircleItem color="white" size={443} style={{left: "20%", top: -299}} />
         <CircleItem className="hide-medium-and-down" color="white" size={397} style={{right: 210, top: "15%"}} />
-        <CircleItem color="#171717" size={247} style={{right: 59, bottom: 87}} />
+        <CircleItem className="hide-medium-and-down" color="#171717" size={247} style={{right: 59, bottom: 87}} />
     </>,
 
 ]

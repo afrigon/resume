@@ -2,11 +2,11 @@ import React from 'react'
 import WOW from 'wowjs';
 import styled from 'styled-components'
 
-import Separator from 'components/Separator'
+import Device from '../Device'
 import Introduction from './Introduction'
+import Separator from 'components/Separator'
 import Projects from './Projects'
 import Footer from './Footer'
-import Device from '../Device'
 
 const Main = styled.div`
     width: 100%;
