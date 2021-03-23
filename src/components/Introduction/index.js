@@ -60,9 +60,8 @@ export default function Introduction() {
                     <Line width="100px" height="5px" offsetX="-35px" offsetY="28px" />
                 </GreenCircle>
                 <OrangeCircle>
-                    <Circle size={265} color={Color.orange} />
+                    <Circle className="wow zoomIn" data-wow-delay="600ms"  size={265} color={Color.orange} />
                 </OrangeCircle>
-                <OrangeCircle className="wow zoomIn" data-wow-delay="600ms" size={265} color={Color.orange} />
             </Container>
             <BlueCircle>
                 <Circle style={{position: 'absolute'}} className="wow zoomIn" size={788} color={Color.blue} />

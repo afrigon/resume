@@ -126,7 +126,7 @@ const circlePatterns = [
 ]
 
 export default function Project(props) {
-    const { title, description, href, src, action, color, gravity, imgStyle } = props
+    const { title, description, href, src, altsrc, action, color, gravity, imgStyle } = props
 
     return (
         <Container color={color}>
@@ -137,8 +137,14 @@ export default function Project(props) {
                     <ActionButton action={action} href={href} />
                 </TextContainer>
                 <ImageContainer>
-                    <Image src={src} alt={`${title} Demo Image`} style={imgStyle} />
+                    <picture>
+                        <source srcset={src} type="image/webp" />
+                        <source srcset={altsrc} type="image/jpeg" />
+
+                        <Image src={src} alt={`${title} Demo Image`} style={imgStyle} />
+                    </picture>
                 </ImageContainer>
+
             </ContentContainer>
             {circlePatterns[Math.floor(Math.random() * circlePatterns.length)]}
         </Container>

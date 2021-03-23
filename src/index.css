@@ -39,3 +39,31 @@ h1, h2, h3, h4, h5, h6, p {
     -o-user-select: none;
 }
 
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@media print, (prefers-reduced-motion: reduce) {
+    .animated {
+        animation-duration: 1ms !important;
+        transition-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.zoomIn {
+  animation-name: zoomIn;
+}
+
