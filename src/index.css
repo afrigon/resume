@@ -53,19 +53,3 @@ h1, h2, h3, h4, h5, h6, p {
         animation-iteration-count: 1 !important;
     }
 }
-
-@keyframes zoomIn {
-  from {
-    opacity: 0;
-    transform: scale3d(0.3, 0.3, 0.3);
-  }
-
-  50% {
-    opacity: 1;
-  }
-}
-
-.zoomIn {
-  animation-name: zoomIn;
-}
-

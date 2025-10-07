@@ -1,3 +1,4 @@
+import { CSSProperties, ImgHTMLAttributes } from 'react'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -10,7 +11,15 @@ const Container = styled.div`
     margin: 30px 55px;
 `
 
-export default function SocialButton(props) {
+interface SocialButtonProps {
+    href: string
+    color: string
+    src: string
+    alt: string
+    imgStyle?: { paddingLeft: number, height: number }
+}
+
+export default function SocialButton(props: SocialButtonProps) {
     return (
         <a href={props.href} target="_blank" rel="noreferrer">
             <Container style={{backgroundColor: props.color || "#FFF"}}>

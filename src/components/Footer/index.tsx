@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 
-import { H2 } from 'components/Text'
-import SocialButton from 'components/Footer/SocialButton'
+import { H2 } from '../Text'
+import SocialButton from './SocialButton'
 import Device from '../../Device'
 
-import github from 'components/Footer/logo-github.png'
-import linkedin from 'components/Footer/logo-linkedin.png'
-import email from 'components/Footer/logo-email.svg'
+import github from "./logo-github.png"
+import linkedin from "./logo-linkedin.png"
+import email from "./logo-email.svg"
 
 const Container = styled.div`
     display: flex;

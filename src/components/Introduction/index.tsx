@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled from "styled-components"
 
-import { H1, H4 } from 'components/Text'
-import Circle from 'components/Circle'
+import { H1, H4 } from '../Text'
+import Circle from '../Circle'
 import Color from '../../Color'
 
 const Container = styled.div`
@@ -36,7 +36,14 @@ const BlueCircle = styled.div`
     z-index: 10;
 `
 
-const Line = styled.div(props => `
+interface LineProps {
+    width: string
+    height: string
+    offsetX: string
+    offsetY: string
+}
+
+const Line = styled.div((props: LineProps) => `
     display: inline-block;
     background-color: #2A2D39;
     width: ${props.width};
@@ -56,15 +63,15 @@ export default function Introduction() {
                 <Title>Hi I'm Alex.</Title>
                 <Subtitle>Software Developer</Subtitle>
                 <GreenCircle>
-                    <Circle className="wow zoomIn" data-wow-delay="300ms" size={80} color={Color.green} style={{display: 'inline-block'}} />
+                    <Circle data-aos="zoom-in" data-aos-delay="300ms" size={80} color={Color.green} style={{display: 'inline-block'}} />
                     <Line width="100px" height="5px" offsetX="-35px" offsetY="28px" />
                 </GreenCircle>
                 <OrangeCircle>
-                    <Circle className="wow zoomIn" data-wow-delay="600ms"  size={265} color={Color.orange} />
+                    <Circle data-aos="zoom-in" data-aos-delay="600ms"  size={265} color={Color.orange} />
                 </OrangeCircle>
             </Container>
             <BlueCircle>
-                <Circle style={{position: 'absolute'}} className="wow zoomIn" size={788} color={Color.blue} />
+                <Circle style={{position: 'absolute'}} data-aos="zoom-in" size={788} color={Color.blue} />
             </BlueCircle>
         </>
     )

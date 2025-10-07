@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-import { H3 } from 'components/Text'
+import { H3 } from '../Text'
 import Color from '../../Color'
 import Device from '../../Device'
 import ActionButton from './ActionButton'
-import Circle from 'components/Circle'
+import Circle from '../Circle'
 
 const Container = styled.div(props => `
     border-radius: 43px;
