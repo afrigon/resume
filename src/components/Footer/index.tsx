@@ -1,8 +1,8 @@
-import styled from 'styled-components'
+import styled from "styled-components"
 
-import { H2 } from '../Text'
-import SocialButton from './SocialButton'
-import Device from '../../Device'
+import { H2 } from "../Text"
+import SocialButton from "./SocialButton"
+import Device from "../../Device"
 
 import github from "./logo-github.png"
 import linkedin from "./logo-linkedin.png"

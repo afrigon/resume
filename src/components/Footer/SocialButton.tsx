@@ -1,5 +1,4 @@
-import { CSSProperties, ImgHTMLAttributes } from 'react'
-import styled from 'styled-components'
+import styled from "styled-components"
 
 const Container = styled.div`
     width: 210px;

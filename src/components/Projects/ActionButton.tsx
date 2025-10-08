@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled from "styled-components"
 
-import Color from '../../Color'
-import Device from '../../Device'
+import Color from "../../Color"
+import Device from "../../Device"
 
 const Container = styled.div`
     display: inline-block;

@@ -1,5 +1,7 @@
-import Aos from "aos"
 import styled from "styled-components"
+
+import Aos from "aos"
+import "aos/dist/aos.css"
 
 import Device from "../Device"
 import Introduction from "./Introduction"

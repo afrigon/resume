@@ -17,6 +17,9 @@
         "isolatedModules": true
     },
     "include": [
-        "src"
+        "src", 
+        "eslint.config.ts",
+        "prettier.config.ts",
+        "vite.config.ts"
     ]
 }

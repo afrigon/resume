@@ -1,8 +1,8 @@
 import styled from "styled-components"
 
-import { H1, H4 } from '../Text'
-import Circle from '../Circle'
-import Color from '../../Color'
+import { H1, H4 } from "../Text"
+import Circle from "../Circle"
+import Color from "../../Color"
 
 const Container = styled.div`
     position: relative;
@@ -45,7 +45,7 @@ interface LineProps {
 
 const Line = styled.div((props: LineProps) => `
     display: inline-block;
-    background-color: #2A2D39;
+    background-color:rgb(80, 82, 93);
     width: ${props.width};
     height: ${props.height};
     margin-left: ${props.offsetX};
@@ -63,15 +63,15 @@ export default function Introduction() {
                 <Title>Hi I'm Alex.</Title>
                 <Subtitle>Software Developer</Subtitle>
                 <GreenCircle>
-                    <Circle data-aos="zoom-in" data-aos-delay="300ms" size={80} color={Color.green} style={{display: 'inline-block'}} />
-                    <Line width="100px" height="5px" offsetX="-35px" offsetY="28px" />
+                    <Circle data-aos="zoom-in" data-aos-delay="600" size={80} color={Color.green} style={{display: "inline-block"}} />
+                    <Line data-aos="fade-right" data-aos-delay="900" width="100px" height="5px" offsetX="-35px" offsetY="28px" />
                 </GreenCircle>
                 <OrangeCircle>
-                    <Circle data-aos="zoom-in" data-aos-delay="600ms"  size={265} color={Color.orange} />
+                    <Circle data-aos="zoom-in" data-aos-delay="300"  size={265} color={Color.orange} />
                 </OrangeCircle>
             </Container>
             <BlueCircle>
-                <Circle style={{position: 'absolute'}} data-aos="zoom-in" size={788} color={Color.blue} />
+                <Circle style={{position: "absolute"}} data-aos="zoom-in" size={788} color={Color.blue} />
             </BlueCircle>
         </>
     )

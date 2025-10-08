@@ -1,6 +1,6 @@
 const size = {
-    smallScreen: '600px',
-    mediumScreen: '1100px',
+    smallScreen: "600px",
+    mediumScreen: "1100px"
 }
 
 const Device = {

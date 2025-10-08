@@ -1,10 +1,10 @@
-import styled from 'styled-components'
+import styled from "styled-components"
 
-import { H3 } from '../Text'
-import Color from '../../Color'
-import Device from '../../Device'
-import ActionButton from './ActionButton'
-import Circle from '../Circle'
+import { H3 } from "../Text"
+import Color from "../../Color"
+import Device from "../../Device"
+import ActionButton from "./ActionButton"
+import Circle from "../Circle"
 
 const Container = styled.div(props => `
     border-radius: 43px;
@@ -121,7 +121,7 @@ const circlePatterns = [
         <CircleItem color="white" size={443} style={{left: "20%", top: -299}} />
         <CircleItem className="hide-medium-and-down" color="white" size={397} style={{right: 210, top: "15%"}} />
         <CircleItem className="hide-medium-and-down" color="#171717" size={247} style={{right: 59, bottom: 87}} />
-    </>,
+    </>
 
 ]
 
@@ -138,8 +138,8 @@ export default function Project(props) {
                 </TextContainer>
                 <ImageContainer>
                     <picture>
-                        <source srcset={src} type="image/webp" />
-                        <source srcset={altsrc} type="image/jpeg" />
+                        <source srcSet={src} type="image/webp" />
+                        <source srcSet={altsrc} type="image/jpeg" />
 
                         <Image src={src} alt={`${title} Demo Image`} style={imgStyle} />
                     </picture>
