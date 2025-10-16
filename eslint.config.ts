@@ -10,6 +10,7 @@ export default defineConfig(
     tseslint.configs.recommendedTypeChecked,
     react.configs.flat.recommended,
     react.configs.flat["jsx-runtime"],
+    reactHooks.configs.flat.recommended,
     {
         languageOptions: {
             ecmaVersion: 2022,
@@ -22,13 +23,7 @@ export default defineConfig(
             react: {
                 version: "detect"
             }
-        },
-        plugins: {
-            "react-hooks": reactHooks
-        },
-        extends: [
-            "react-hooks/recommended",
-        ]
+        }
     },
     prettier
 )

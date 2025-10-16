@@ -1,37 +1,23 @@
-import styled from "styled-components"
+import LiquidGradientBackground from "./gradient/LiquidGradientBackground"
+import ProjectCollectionView from "./projects/ProjectCollectionView"
 
-import Aos from "aos"
-import "aos/dist/aos.css"
-
-import Device from "../Device"
-import Introduction from "./Introduction"
-import Separator from "./Separator"
-import Projects from "./Projects"
-import Footer from "./Footer"
-
-const Main = styled.div`
-    width: 100%;
-    overflow-x: hidden;
-    padding: 0 80px;
-    box-sizing: border-box;
-    position: relative;
-
-    @media ${Device.smallAndDown} {
-        padding: 0 25px;
-    }
-`
-
-export default function App () {
-    Aos.init()
-
+export default function App() {
     return (
-        <Main>
-            <Introduction />
-            <Separator />
-            <Projects />
-            <Separator />
-            <Footer />
-        </Main>
+        <div className="text-gray-900">
+            <div>
+                <LiquidGradientBackground className="w-full h-160 absolute top-0 left-0 -z-10" />
+
+                <section className="px-4 h-160">
+                    <h1 className="font-bold text-7xl text-gray-200">{"Hi I'm Alex."}</h1>
+                </section>
+            </div>
+
+
+            <div className="bg-gray-100 w-full grid justify-center">
+                <div className="max-w-[1080px]">
+                    <ProjectCollectionView />
+                </div>
+            </div>
+        </div>
     )
 }
-

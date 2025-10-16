@@ -1,40 +1,46 @@
-@import-normalize;
 @import "tailwindcss";
 
-body {
-    margin: 0;
-    /* font-family: "Manrope Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; */
-    font-family: "Inter Variable", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+@theme {
+    --breakpoint-*: initial;
+    --breakpoint-tiny: 250px;
+    --breakpoint-desktop: 900px;
+
+    --font-sans:
+        "Inter Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+        "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+@layer base {
+    html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
 }
 
-h1, h2, h3, h4, h5, h6, p {
-    margin: 0;
-    padding: 0;
-}
+@layer components {
+    h1 {
+        @apply text-4xl font-bold text-gray-700 max-tiny:text-2xl;
+    }
 
-.unselectable {
-    user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -o-user-select: none;
-}
+    h2 {
+        @apply text-lg font-bold text-gray-700 max-tiny:text-sm;
+    }
 
-.animated {
-    animation-duration: 1s;
-    animation-fill-mode: both;
-}
+    p,
+    li,
+    a {
+        @apply text-lg font-light text-gray-600 max-tiny:text-sm;
+    }
 
-@media print, (prefers-reduced-motion: reduce) {
-    .animated {
-        animation-duration: 1ms !important;
-        transition-duration: 1ms !important;
-        animation-iteration-count: 1 !important;
+    a {
+        @apply font-medium text-indigo-500 hover:text-gray-700;
+    }
+
+    .cta {
+        @apply font-medium text-base py-1.5 pl-4 pr-[13px] rounded-2xl whitespace-nowrap max-tiny:text-[10px] max-tiny:pl-2 max-tiny:pr-[6px];
+    }
+
+    .github {
+        @apply bg-black text-white hover:text-white;
     }
 }
