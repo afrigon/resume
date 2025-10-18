@@ -10,7 +10,10 @@ export class LiquidGradientShader extends x3d.ManagedShader {
             fragment: fragment,
             params: [
                 ...x3d.ShaderParam.default(),
-                new x3d.ShaderParam("vec4", "color", x3d.Color.white.vector)
+                new x3d.ShaderParam("vec4", "color1", x3d.Color.white.vector),
+                new x3d.ShaderParam("vec4", "color2", x3d.Color.white.vector),
+                new x3d.ShaderParam("vec4", "color3", x3d.Color.white.vector),
+                new x3d.ShaderParam("vec4", "color4", x3d.Color.white.vector)
             ]
         })
     }
