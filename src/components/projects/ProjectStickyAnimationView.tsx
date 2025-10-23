@@ -9,10 +9,10 @@ interface ProjectStickyAnimationContainerViewProps {
 
 interface ProjectStickyAnimationViewProps {
     displayed: boolean
-    project: string
+    children: ReactNode
 }
 
-export function ProjectStickyAnimationView({ displayed, project }: ProjectStickyAnimationViewProps) {
+export function ProjectStickyAnimationView({ displayed, children }: ProjectStickyAnimationViewProps) {
     return (
         <motion.div
             initial={{
@@ -23,9 +23,10 @@ export function ProjectStickyAnimationView({ displayed, project }: ProjectSticky
                 opacity: displayed ? 1 : 0,
                 scale: displayed ? 1 : 1.05
             }}
-            className="w-full h-full absolute top-0 left-0 rounded-4xl"
-            style={{ backgroundColor: project }}
-        ></motion.div>
+            className="w-full absolute top-1/2 -translate-y-1/2 left-0"
+        >
+            {children}
+        </motion.div>
     )
 }
 

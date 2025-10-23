@@ -8,13 +8,45 @@ export class LiquidGradientShader extends x3d.ManagedShader {
             id: "liquid-gradient",
             vertex,
             fragment: fragment,
-            params: [
-                ...x3d.ShaderParam.default(),
-                new x3d.ShaderParam("vec4", "color1", x3d.Color.white.vector),
-                new x3d.ShaderParam("vec4", "color2", x3d.Color.white.vector),
-                new x3d.ShaderParam("vec4", "color3", x3d.Color.white.vector),
-                new x3d.ShaderParam("vec4", "color4", x3d.Color.white.vector)
-            ]
+            structures: [
+                { 
+                    name: "Layer", 
+                    fields: {
+                        color: { type: "vec3" },
+                        floor: { type: "float" },
+                        ceiling: { type: "float" },
+                        speed: { type: "float" },
+                        frequency: { type: "vec2" },
+                        flow: { type: "float" },
+                        seed: { type: "float" }
+                    }
+                },
+                {
+                    name: "Deformation",
+                    fields: {
+                        incline: { type: "float" },
+                        offsetTop: { type: "float" },
+                        offsetBottom: { type: "float" },
+                        speed: { type: "float" },
+                        frequency: { type: "vec2" },
+                        amplitude: { type: "float" },
+                        flow: { type: "float" },
+                        seed: { type: "float" }
+                    }
+                }
+            ],
+            uniforms: {
+                speed: { type: "float" },
+                frequency: { type: "vec2" },
+                color: { type: "vec3" },
+                layers: {
+                    type: "array", 
+                    size: 3, 
+                    of: { type: "struct", name: "Layer" }
+                },
+                deformation: { type: "struct", name: "Deformation" }
+            },
+            globals: true
         })
     }
 }

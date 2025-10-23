@@ -37,7 +37,7 @@
     }
 
     .cta {
-        @apply font-medium text-base py-1.5 pl-4 pr-[13px] rounded-2xl whitespace-nowrap max-tiny:text-[10px] max-tiny:pl-2 max-tiny:pr-[6px];
+        @apply font-medium text-base py-1.5 pl-4 pr-[13px] rounded-2xl whitespace-nowrap max-tiny:text-sm max-tiny:w-full max-tiny:text-center;
     }
 
     .github {

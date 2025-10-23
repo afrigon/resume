@@ -106,56 +106,50 @@ vec3 blendNormal(vec3 base, vec3 blend, float opacity) {
 }
 
 void main() {
-    float noiseAmpliture = 320.0;
-    float noiseFrequencyX = 3.0;
-    float noiseFrequencyY = 4.0;
-    float noiseFlow = 1.0;
-    float noiseSpeed = 0.0001;
-    float noiseSeed = 0.0;
-    
     v_uv = input_uv;
-    vec2 noise_coords = resolution * input_uv * vec2(noiseFrequencyX, noiseFrequencyY);
+    vec2 uv_norm = input_uv * 2.0 - 1.0;
+
+    float time = globals.time * speed;
+    vec2 noise_coords = globals.resolution * uv_norm * frequency;
     
-    float tilt = resolution.y / 2.0 * input_uv.y;
+    float tilt = globals.resolution.y / 2.0 * uv_norm.y;
+    float incline = globals.resolution.x * uv_norm.x / 2.0 * deformation.incline;
+    float offset = globals.resolution.x / 2.0 * deformation.incline * mix(deformation.offsetBottom, deformation.offsetTop, input_uv.y);
 
     float noise = snoise(
         vec3(
-            noise_coords.x * noiseFrequencyX + time * noiseSpeed * noiseFlow,
-            noise_coords.y * noiseFrequencyY,
-            time * noiseSpeed + noiseSeed
+            noise_coords.x * deformation.frequency.x + time * deformation.flow,
+            noise_coords.y * deformation.frequency.y,
+            time * deformation.speed + deformation.seed
         )
-    ) * noiseAmpliture;
+    ) * deformation.amplitude;
 
-    noise *= 1.0 - pow(abs(input_uv.y), 2.0);
+    noise *= 1.0 - pow(abs(uv_norm.y), 2.0);
     noise = max(0.0, noise);
 
     vec3 position = vec3(
         input_vertex.x,
-        input_vertex.y + noise,
+        input_vertex.y + tilt + incline + noise - offset,
         input_vertex.z
     );
 
-    //v_color = color1.xyz;
+    v_color = color;
 
     for (int i = 0; i < 3; i++) {
+        Layer layer = layers[i];
+
         float noise = smoothstep(
-            0.1,
-            .63 + .07 * float(i),
+            layer.floor,
+            layer.ceiling,
             snoise(vec3(
-                noise_coords.x * 0.02 + time * noiseSpeed,
-                noise_coords.y * 0.01,
-                time * noiseSpeed + (noiseSeed + 10.0 * float(i))
+                noise_coords.x * layer.frequency.x + time * layer.flow,
+                noise_coords.y * layer.frequency.y,
+                time * layer.speed + layer.seed
             )) / 2.0 + 0.5
         );
 
-        if (i == 0) {
-            v_color = blendNormal(v_color, color2.xyz, pow(noise, 4.));
-        } else if (i == 1) {
-           // v_color = blendNormal(v_color, color3.xyz, pow(noise, 4.));
-        } else if (i == 2) {
-           // v_color = blendNormal(v_color, color4.xyz, pow(noise, 4.));
-        }
+        v_color = blendNormal(v_color, layer.color, pow(noise, 4.));
     }
 
-    gl_Position = projection * view * model * vec4(position, 1.0);
+    gl_Position = globals.mvp * vec4(position, 1.0);
 }

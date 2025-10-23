@@ -1,5 +1,6 @@
 import ChevronSymbol from "../ChevronSymbol"
 import useHover from "../../hooks/UseHover"
+import { ReactElement } from "react"
 
 export type Project = {
     id: string
@@ -13,7 +14,7 @@ export type Project = {
         type: "github"
     }
     extras?: { title: string; description: string; link: string }[]
-    artwork: string
+    artwork: () => ReactElement
 }
 
 interface ProjectViewProps {

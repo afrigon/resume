@@ -1,25 +1,18 @@
-import { CSSProperties } from "react"
-import useGeometryReader from "../../hooks/UseGeometryReader"
+import { CSSProperties, ReactNode } from "react"
 
 interface ProjectAnimationViewProps {
-    type: "sticky" | "standalone"
-    color: string
+    children: ReactNode
 }
 
-export default function ProjectAnimationView({ type = "sticky", color }: ProjectAnimationViewProps) {
-    const [ref, geometry] = useGeometryReader()
-
-    let classes: string = "mx-4 w-auto aspect-square"
+export default function ProjectAnimationView({ children }: ProjectAnimationViewProps) {
+    const classes: string = "mx-4 w-auto aspect-square"
     const style: CSSProperties = {}
 
-    if (type == "sticky") {
-        classes += " sticky"
-        style.top = `calc(50% - ${geometry.height / 2}px)`
-    }
-
     return (
-        <div ref={ref} className={classes} style={style}>
-            <div className="w-full h-full" style={{ backgroundColor: color }}></div>
+        <div className={classes} style={style}>
+            <div className="w-full h-full flex flex-col justify-center px-8 max-tiny:px-0">
+                { children }
+            </div>
         </div>
     )
 }

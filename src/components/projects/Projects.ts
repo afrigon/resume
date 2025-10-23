@@ -1,6 +1,7 @@
 import { Project } from "./ProjectView"
 import iconXemu from "./icons/xemu.png"
 import iconRoadrunner from "./icons/roadrunner.png"
+import { RoadrunnerShowcase } from "./showcase/RoadrunnerShowcase"
 
 const xemu: Project = {
     id: "xemu",
@@ -26,7 +27,7 @@ const xemu: Project = {
             link: "https://github.com/afrigon/ines-cli"
         }
     ],
-    artwork: "blue"
+    artwork: () => RoadrunnerShowcase()
 }
 
 const roadrunner: Project = {
@@ -58,7 +59,7 @@ const roadrunner: Project = {
             link: "https://github.com/roadrunner-craft/math"
         }
     ],
-    artwork: "green"
+    artwork: () => RoadrunnerShowcase()
 }
 
 export default [xemu, roadrunner]

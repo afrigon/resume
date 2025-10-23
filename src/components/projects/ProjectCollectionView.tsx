@@ -14,7 +14,7 @@ interface AnchorProps {
 
 function Anchor({ id, callback, children }: AnchorProps) {
     const ref = useRef(null)
-    const isInView = useInView(ref)
+    const isInView = useInView(ref, { amount: "all" })
 
     useEffect(() => {
         if (isInView) {
@@ -43,19 +43,22 @@ export default function ProjectCollectionView() {
                     </Anchor>
 
                     {i == 0 && (
-                        <ProjectStickyAnimationContainerView height={geometry.height}>
+                        <ProjectStickyAnimationContainerView height={geometry.height - 192 * 2}>
                             {projects.map(project => (
                                 <ProjectStickyAnimationView
                                     key={project.id}
                                     displayed={current == project.id}
-                                    project={project.artwork}
-                                />
+                                >
+                                    {project.artwork()}
+                                </ProjectStickyAnimationView>
                             ))}
                         </ProjectStickyAnimationContainerView>
                     )}
 
                     <div className="desktop:hidden">
-                        <ProjectAnimationView type="standalone" color="red" />
+                        <ProjectAnimationView>
+                            {project.artwork()}
+                        </ProjectAnimationView>
                     </div>
                 </div>
             ))}
