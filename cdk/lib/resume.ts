@@ -61,7 +61,7 @@ export class ResumeStack extends Stack {
             target: r53.RecordTarget.fromAlias(new r53Targets.CloudFrontTarget(distribution))
         })
 
-        // Deploy hashed assets (JS/CSS) with immutable cache
+        // Hashed assets with immutable cache
         new s3Deploy.BucketDeployment(this, "content-assets", {
             sources: [s3Deploy.Source.asset("../dist/assets")],
             destinationBucket: bucket,
@@ -76,7 +76,7 @@ export class ResumeStack extends Stack {
             ]
         })
 
-        // Deploy static files (favicons, robots.txt, etc.) from dist root
+        // Static files (favicons, robots.txt, etc.)
         new s3Deploy.BucketDeployment(this, "content-static", {
             sources: [
                 s3Deploy.Source.asset("../dist", {
@@ -94,7 +94,12 @@ export class ResumeStack extends Stack {
         })
 
         new s3Deploy.BucketDeployment(this, "content", {
-            sources: [s3Deploy.Source.asset("../dist/index.html")],
+            sources: [
+                s3Deploy.Source.asset("../dist", {
+                    exclude: ["**", "!index.html"],
+                    ignoreMode: cdk.IgnoreMode.GIT
+                })
+            ],
             destinationBucket: bucket,
             distribution,
             distributionPaths: ["/index.html", "/*"],
