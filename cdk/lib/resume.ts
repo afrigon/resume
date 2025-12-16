@@ -80,30 +80,13 @@ export class ResumeStack extends Stack {
         new s3Deploy.BucketDeployment(this, "content-static", {
             sources: [
                 s3Deploy.Source.asset("../dist", {
-                    exclude: ["index.html", "assets"]
+                    exclude: ["assets"]
                 })
             ],
             destinationBucket: bucket,
             distribution,
             distributionPaths: ["/*"],
             prune: true,
-            cacheControl: [
-                s3Deploy.CacheControl.setPublic(),
-                s3Deploy.CacheControl.maxAge(cdk.Duration.days(30))
-            ]
-        })
-
-        new s3Deploy.BucketDeployment(this, "content", {
-            sources: [
-                s3Deploy.Source.asset("../dist", {
-                    exclude: ["**", "!index.html"],
-                    ignoreMode: cdk.IgnoreMode.GIT
-                })
-            ],
-            destinationBucket: bucket,
-            distribution,
-            distributionPaths: ["/index.html", "/*"],
-            prune: false,
             cacheControl: [
                 s3Deploy.CacheControl.setPublic(),
                 s3Deploy.CacheControl.maxAge(cdk.Duration.days(30))
