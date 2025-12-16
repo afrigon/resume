@@ -1,71 +1,46 @@
-@import-normalize;
+@import "tailwindcss";
 
-@font-face {
-    font-family: 'geomanist';
-    src: url('./fonts/geomanist/geomanist-book-webfont.woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+@theme {
+    --breakpoint-*: initial;
+    --breakpoint-tiny: 250px;
+    --breakpoint-desktop: 900px;
+
+    --font-sans:
+        "Inter Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+        "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-@font-face {
-    font-family: 'geomanist';
-    src: url('./fonts/geomanist/geomanist-bold-webfont.ttf');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-body {
-    margin: 0;
-    font-family: geomanist, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-}
-
-h1, h2, h3, h4, h5, h6, p {
-    margin: 0;
-    padding: 0;
-}
-
-.unselectable {
-    user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -o-user-select: none;
-}
-
-.animated {
-    animation-duration: 1s;
-    animation-fill-mode: both;
-}
-
-@media print, (prefers-reduced-motion: reduce) {
-    .animated {
-        animation-duration: 1ms !important;
-        transition-duration: 1ms !important;
-        animation-iteration-count: 1 !important;
+@layer base {
+    html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 }
 
-@keyframes zoomIn {
-  from {
-    opacity: 0;
-    transform: scale3d(0.3, 0.3, 0.3);
-  }
+@layer components {
+    h1 {
+        @apply text-4xl font-bold text-gray-700 max-tiny:text-2xl;
+    }
 
-  50% {
-    opacity: 1;
-  }
+    h2 {
+        @apply text-lg font-bold text-gray-700 max-tiny:text-sm;
+    }
+
+    p,
+    li,
+    a {
+        @apply text-lg font-light text-gray-600 max-tiny:text-sm;
+    }
+
+    a {
+        @apply font-medium text-indigo-500 hover:text-gray-700;
+    }
+
+    .cta {
+        @apply font-medium text-base py-1.5 pl-4 pr-[13px] rounded-2xl whitespace-nowrap max-tiny:text-sm max-tiny:w-full max-tiny:text-center;
+    }
+
+    .github {
+        @apply bg-black text-white hover:text-white;
+    }
 }
-
-.zoomIn {
-  animation-name: zoomIn;
-}
-

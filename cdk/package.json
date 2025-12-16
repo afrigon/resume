@@ -1,0 +1,32 @@
+{
+  "name": "aws-setup",
+  "version": "0.0.4",
+  "description": "personal aws setup",
+  "keywords": [
+    "aws",
+    "config"
+  ],
+  "license": "MIT",
+  "author": "xehos",
+  "type": "module",
+  "bin": "bin/app.ts",
+  "scripts": {
+    "lint": "eslint --fix bin lib",
+    "type-check": "tsc --noEmit",
+    "deploy-core": "cdk deploy --all"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@types/node": "^24.6.2",
+    "aws-cdk": "^2.1029.4",
+    "eslint": "^9.36.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.45.0"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.219.0",
+    "constructs": "^10.4.2",
+    "xehos-cdk-lib": "github:afrigon/xehos-cdk-lib"
+  }
+}

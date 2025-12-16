@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "lib": [
+            "ES2022",
+            "DOM",
+            "DOM.Iterable"
+        ],
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "moduleDetection": "force",
+		"resolveJsonModule": true,
+        "allowImportingTsExtensions": true,
+        "noEmit": true,
+        "strict": true,
+        "jsx": "react-jsx",
+        "isolatedModules": true,
+        "types": ["vite/client"]
+    },
+    "include": [
+        "src", 
+        "eslint.config.ts",
+        "prettier.config.ts",
+        "vite.config.ts"
+    ]
+}
