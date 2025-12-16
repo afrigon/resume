@@ -29,11 +29,19 @@ export class ResumeStack extends Stack {
             versioned: false
         })
 
-        const distribution = new cf.Distribution(this, "disctribution", {
+        const distribution = new cf.Distribution(this, "distribution", {
             defaultRootObject: "index.html",
             domainNames: ["alexandre.frigon.app"],
             certificate,
             httpVersion: cf.HttpVersion.HTTP2_AND_3,
+            errorResponses: [
+                {
+                    httpStatus: 404,
+                    responseHttpStatus: 200,
+                    responsePagePath: "/index.html",
+                    ttl: cdk.Duration.days(30)
+                }
+            ],
             defaultBehavior: {
                 origin: cfOrigins.S3BucketOrigin.withOriginAccessControl(bucket),
                 viewerProtocolPolicy: cf.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
@@ -53,33 +61,47 @@ export class ResumeStack extends Stack {
             target: r53.RecordTarget.fromAlias(new r53Targets.CloudFrontTarget(distribution))
         })
 
-        new s3Deploy.BucketDeployment(this, "content-static", {
-            sources: [
-                s3Deploy.Source.asset("../dist"),
-                s3Deploy.Source.asset("../public", { exclude: ["index.html"] })
-            ],
+        // Deploy hashed assets (JS/CSS) with immutable cache
+        new s3Deploy.BucketDeployment(this, "content-assets", {
+            sources: [s3Deploy.Source.asset("../dist/assets")],
             destinationBucket: bucket,
-            destinationKeyPrefix: "static",
+            destinationKeyPrefix: "assets",
             distribution,
-            distributionPaths: ["/static/*"],
+            distributionPaths: ["/assets/*"],
             prune: true,
             cacheControl: [
                 s3Deploy.CacheControl.setPublic(),
-                s3Deploy.CacheControl.maxAge(cdk.Duration.days(30)),
+                s3Deploy.CacheControl.maxAge(cdk.Duration.days(365)),
                 s3Deploy.CacheControl.immutable()
             ]
         })
 
-        new s3Deploy.BucketDeployment(this, "content", {
-            sources: [s3Deploy.Source.asset("../public/index.html")],
+        // Deploy static files (favicons, robots.txt, etc.) from dist root
+        new s3Deploy.BucketDeployment(this, "content-static", {
+            sources: [
+                s3Deploy.Source.asset("../dist", {
+                    exclude: ["index.html", "assets"]
+                })
+            ],
             destinationBucket: bucket,
             distribution,
-            distributionPaths: ["/index.html"],
+            distributionPaths: ["/*"],
+            prune: true,
+            cacheControl: [
+                s3Deploy.CacheControl.setPublic(),
+                s3Deploy.CacheControl.maxAge(cdk.Duration.days(30))
+            ]
+        })
+
+        new s3Deploy.BucketDeployment(this, "content", {
+            sources: [s3Deploy.Source.asset("../dist/index.html")],
+            destinationBucket: bucket,
+            distribution,
+            distributionPaths: ["/index.html", "/*"],
             prune: false,
             cacheControl: [
                 s3Deploy.CacheControl.setPublic(),
-                s3Deploy.CacheControl.maxAge(cdk.Duration.days(30)),
-                s3Deploy.CacheControl.immutable()
+                s3Deploy.CacheControl.maxAge(cdk.Duration.days(30))
             ]
         })
     }

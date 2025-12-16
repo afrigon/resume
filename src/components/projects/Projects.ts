@@ -9,7 +9,7 @@ const xemu: Project = {
     title: "xemu",
     subtitle: "NES Emulator",
     description:
-        "Built a cycle-accurate NES emulator for iOS, macOS and tvOS using Swift and the Metal API. Features a debugger, a game library with thumbnail generation and audio emulation.",
+        "Built a cycle-accurate NES emulator for iOS, macOS and tvOS using Swift and the Metal API. Features a debugger, a game library with cover art database and audio emulation.",
     icon: iconXemu,
     cta: {
         text: "Browse on Github",
@@ -46,12 +46,12 @@ const roadrunner: Project = {
     extras: [
         {
             title: "Client",
-            description: "side project with an OpenGL renderer",
+            description: "multiplatform OpenGL implementation",
             link: "https://github.com/roadrunner-craft/client"
         },
         {
             title: "Server",
-            description: "side project with simple multiplayer support",
+            description: "provides simple multiplayer support",
             link: "https://github.com/roadrunner-craft/server"
         },
         {
