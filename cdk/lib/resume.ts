@@ -62,7 +62,7 @@ export class ResumeStack extends Stack {
         })
 
         // Hashed assets with immutable cache
-        new s3Deploy.BucketDeployment(this, "content-assets", {
+        const assetsDeployment = new s3Deploy.BucketDeployment(this, "content-assets", {
             sources: [s3Deploy.Source.asset("../dist/assets")],
             destinationBucket: bucket,
             destinationKeyPrefix: "assets",
@@ -76,8 +76,8 @@ export class ResumeStack extends Stack {
             ]
         })
 
-        // Static files (favicons, robots.txt, etc.)
-        new s3Deploy.BucketDeployment(this, "content-static", {
+        // Static files (favicons, robots.txt, etc.) - excludes assets folder
+        const staticDeployment = new s3Deploy.BucketDeployment(this, "content-static", {
             sources: [
                 s3Deploy.Source.asset("../dist", {
                     exclude: ["assets"]
@@ -86,11 +86,14 @@ export class ResumeStack extends Stack {
             destinationBucket: bucket,
             distribution,
             distributionPaths: ["/*"],
-            prune: false,
+            prune: true,
             cacheControl: [
                 s3Deploy.CacheControl.setPublic(),
                 s3Deploy.CacheControl.maxAge(cdk.Duration.days(30))
             ]
         })
+
+        // Ensure static files deployment doesn't interfere with assets
+        staticDeployment.node.addDependency(assetsDeployment)
     }
 }
