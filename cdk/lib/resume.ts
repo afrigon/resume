@@ -40,6 +40,12 @@ export class ResumeStack extends Stack {
                     responseHttpStatus: 200,
                     responsePagePath: "/index.html",
                     ttl: cdk.Duration.days(30)
+                },
+                {
+                    httpStatus: 403,
+                    responseHttpStatus: 200,
+                    responsePagePath: "/index.html",
+                    ttl: cdk.Duration.days(30)
                 }
             ],
             defaultBehavior: {
