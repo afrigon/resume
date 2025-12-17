@@ -86,7 +86,7 @@ export class ResumeStack extends Stack {
             destinationBucket: bucket,
             distribution,
             distributionPaths: ["/*"],
-            prune: true,
+            prune: false,
             cacheControl: [
                 s3Deploy.CacheControl.setPublic(),
                 s3Deploy.CacheControl.maxAge(cdk.Duration.days(30))
