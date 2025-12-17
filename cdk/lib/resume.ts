@@ -61,27 +61,9 @@ export class ResumeStack extends Stack {
             target: r53.RecordTarget.fromAlias(new r53Targets.CloudFrontTarget(distribution))
         })
 
-        // Hashed assets with immutable cache
-        const assetsDeployment = new s3Deploy.BucketDeployment(this, "content-assets", {
-            sources: [s3Deploy.Source.asset("../dist/assets")],
-            destinationBucket: bucket,
-            destinationKeyPrefix: "assets",
-            distribution,
-            distributionPaths: ["/assets/*"],
-            prune: true,
-            cacheControl: [
-                s3Deploy.CacheControl.setPublic(),
-                s3Deploy.CacheControl.maxAge(cdk.Duration.days(365)),
-                s3Deploy.CacheControl.immutable()
-            ]
-        })
-
-        // Static files (favicons, robots.txt, etc.) - excludes assets folder
-        const staticDeployment = new s3Deploy.BucketDeployment(this, "content-static", {
+        new s3Deploy.BucketDeployment(this, "content", {
             sources: [
-                s3Deploy.Source.asset("../dist", {
-                    exclude: ["assets"]
-                })
+                s3Deploy.Source.asset("../dist")
             ],
             destinationBucket: bucket,
             distribution,
@@ -92,8 +74,5 @@ export class ResumeStack extends Stack {
                 s3Deploy.CacheControl.maxAge(cdk.Duration.days(30))
             ]
         })
-
-        // Ensure static files deployment doesn't interfere with assets
-        staticDeployment.node.addDependency(assetsDeployment)
     }
 }
