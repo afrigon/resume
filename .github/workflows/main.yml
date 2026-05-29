@@ -1,9 +1,9 @@
 name: deploy
-run-name: "CDK deploy (${{ github.ref_name }})"
+run-name: "Terraform deploy (${{ github.ref_name }})"
 
 on:
   push:
-    tags: 
+    tags:
       - "*"
 
 permissions:
@@ -11,19 +11,49 @@ permissions:
   contents: read
 
 env:
-  NODE_VERSION: 22
   AWS_REGION: us-east-1
-  AWS_ACCOUNT: "944671670298"
-  AWS_ROLE: arn:aws:iam::944671670298:role/GithubActions-afrigon-resume
-  CDK_STACKS: "Resume"
+  AWS_ROLE: arn:aws:iam::944671670298:role/terraform-resume
+  NODE_VERSION: 24
 
 jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    outputs:
+      bucket: ${{ steps.outputs.outputs.bucket }}
+      distribution_id: ${{ steps.outputs.outputs.distribution_id }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: ${{ env.AWS_ROLE }}
+          role-session-name: resume-ci-session
+
+      - uses: hashicorp/setup-terraform@v4
+
+      - name: Apply
+        working-directory: ./terraform
+        run: |
+          terraform init
+          terraform plan -out=planout
+          terraform apply planout
+
+      - name: Outputs
+        id: outputs
+        working-directory: ./terraform
+        run: |
+          echo "bucket=$(terraform output -raw bucket)" >> "$GITHUB_OUTPUT"
+          echo "distribution_id=$(terraform output -raw distribution_id)" >> "$GITHUB_OUTPUT"
+
   deploy:
     runs-on: ubuntu-latest
+    needs: terraform
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
@@ -34,21 +64,15 @@ jobs:
       - name: Build Project
         run: npm run build
 
-      - name: Install CDK Dependencies
-        run: npm ci
-        working-directory: ./cdk
-
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v5.0.0
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: ${{ env.AWS_ROLE }}
           role-session-name: resume-ci-session
 
-      - name: CDK synth
-        run: npx cdk synth
-        working-directory: ./cdk
+      - name: Sync Content
+        run: aws s3 sync ./dist "s3://${{ needs.terraform.outputs.bucket }}" --delete --cache-control "public, max-age=2592000"
 
-      - name: CDK deploy
-        run: npx cdk deploy ${{ env.CDK_STACKS }} --require-approval never --verbose
-        working-directory: ./cdk
+      - name: Invalidate Cache
+        run: aws cloudfront create-invalidation --distribution-id "${{ needs.terraform.outputs.distribution_id }}" --paths "/*"

@@ -10,14 +10,7 @@ interface LiquidGradientBackgroundProps {
     style?: CSSProperties
 }
 
-const stripe = [
-    x3d.Color.rgb(169, 96, 238),
-    x3d.Color.rgb(255, 51, 61),
-    x3d.Color.rgb(144, 224, 255),
-    x3d.Color.rgb(255, 202, 87)
-]
-
-export default function LiquidGradientBackground({ 
+export default function LiquidGradientBackground({
     colors,
     className, 
     style

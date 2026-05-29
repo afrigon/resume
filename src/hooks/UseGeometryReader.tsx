@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect, useEffect, useCallback, useRef, RefObject } from "react"
+import { useState, useLayoutEffect, useCallback, useRef, RefObject } from "react"
 
 class Geometry {
     x: number
@@ -30,11 +30,9 @@ export default function useGeometryReader<T extends HTMLElement = HTMLDivElement
         }
 
         setGeometry(new Geometry(element.clientLeft, element.clientTop, element.clientWidth, element.clientHeight))
-    }, [ref])
+    }, [])
 
-    const hook = typeof window !== "undefined" ? useLayoutEffect : useEffect
-
-    hook(() => {
+    useLayoutEffect(() => {
         const element = ref?.current
 
         if (!element) {
@@ -47,7 +45,7 @@ export default function useGeometryReader<T extends HTMLElement = HTMLDivElement
         observer.observe(element)
 
         return () => observer.disconnect()
-    }, [ref, queryGeometry])
+    }, [queryGeometry])
 
     return [ref, geometry]
 }
