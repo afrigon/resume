@@ -37,7 +37,7 @@ resource "aws_cloudfront_distribution" "site" {
 
   custom_error_response {
     error_code            = 404
-    response_code         = 404
+    response_code         = 200
     response_page_path    = "/index.html"
     error_caching_min_ttl = 2592000 # 30 days
   }
@@ -46,7 +46,7 @@ resource "aws_cloudfront_distribution" "site" {
   # an origin access control
   custom_error_response {
     error_code            = 403
-    response_code         = 404
+    response_code         = 200
     response_page_path    = "/index.html"
     error_caching_min_ttl = 2592000
   }
