@@ -42,6 +42,8 @@ resource "aws_cloudfront_distribution" "site" {
     error_caching_min_ttl = 2592000 # 30 days
   }
 
+  # S3 responds 403 rather than 404 for missing keys when accessed through
+  # an origin access control
   custom_error_response {
     error_code            = 403
     response_code         = 200

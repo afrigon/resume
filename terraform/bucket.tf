@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "site" {
-    bucket_prefix = "terraform-resume-"
+  bucket_prefix = "terraform-resume-"
 }
 
 resource "aws_s3_bucket_public_access_block" "site" {
