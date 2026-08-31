@@ -13,7 +13,6 @@ permissions:
 env:
   AWS_REGION: us-east-1
   AWS_ROLE: arn:aws:iam::944671670298:role/terraform-resume
-  NODE_VERSION: 24
 
 jobs:
   terraform:
@@ -53,16 +52,15 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v6
+      - uses: jdx/aube-action@f82ca2f6c943dbde1904945d9f0ee1a0faf8e945 # v1.0.0
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: npm
+          node-version: auto
 
       - name: Install Dependencies
-        run: npm ci
+        run: aube ci
 
       - name: Build Project
-        run: npm run build
+        run: aubr build
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v6

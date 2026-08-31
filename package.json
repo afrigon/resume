@@ -2,9 +2,11 @@
   "name": "resume",
   "version": "2.0.4",
   "private": true,
+  "packageManager": "aube@2.2.0",
   "homepage": "https://alexandre.frigon.app",
   "type": "module",
   "scripts": {
+    "postinstall": "./scripts/prepare-git-dependencies.sh",
     "lint": "eslint src prettier.config.ts vite.config.ts eslint.config.ts --fix",
     "prettier": "prettier src prettier.config.ts vite.config.ts eslint.config.ts --write",
     "build": "vite build",
@@ -51,5 +53,12 @@
     "tailwindcss": "^4.3.0",
     "x3d": "github:afrigon/x3d-js",
     "x3d-react": "github:afrigon/x3d-react"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24.20.0",
+      "onFail": "download"
+    }
   }
 }
