@@ -52,5 +52,12 @@
     "tailwindcss": "^4.3.0",
     "x3d": "github:afrigon/x3d-js",
     "x3d-react": "github:afrigon/x3d-react"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24.20.0",
+      "onFail": "download"
+    }
   }
 }
