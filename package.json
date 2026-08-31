@@ -5,6 +5,7 @@
   "homepage": "https://alexandre.frigon.app",
   "type": "module",
   "scripts": {
+    "postinstall": "./scripts/prepare-git-dependencies.sh",
     "lint": "eslint src prettier.config.ts vite.config.ts eslint.config.ts --fix",
     "prettier": "prettier src prettier.config.ts vite.config.ts eslint.config.ts --write",
     "build": "vite build",
